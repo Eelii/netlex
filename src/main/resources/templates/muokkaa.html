@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Muokkaa</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>WELCOME</h1>
+<p>Tietokantatunnus:</p>
+<p th:text="${statute.statDbId}"></p>
+<p>Säädöksen tunnus:</p>
+<p th:text="${statute.statuteId}"></p>
+<p>Nimi: </p>
+<p th:text="${statute.fullName}"></p>
+
+
+	<h1>Uusi pykälä:</h1>
+		<form th:object="${sectionform}" th:action="@{/savesection}" action="#" method="post">
+			<div>
+				<input type="hidden" th:value="${statute.statDbId}" th:field="${statute.statDbId}">
+				<label> Otsikko: <input type="text" th:field="*{heading}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('heading')}" th:errors="*{heading}">Virhe pykälän otsikossa</p>	
+			</div>
+			<div>
+				<label>Pykälän tunnus: <input type="text" th:field="*{identifier}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}">email Error</p>	
+			</div>
+			<input type="submit" class="btn btn-primary" value="Lisää pykälä"></input>		
+		</form>
+</body>
+</html>

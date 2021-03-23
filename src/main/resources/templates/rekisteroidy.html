@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Rekisteröidy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
+	
+</head>
+<body>
+<div class="container">
+	<h1>Rekisteröidy:</h1>
+     <div class="col-md-4">
+		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
+			<div>
+				<label> Käyttäjänimi: <input type="text" th:field="*{username}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
+			</div>
+			<div>
+				<label> Sähköposti: <input type="text" th:field="*{email}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email Error</p>	
+			</div>
+			<div>
+				<label> Salasana: <input type="password" th:field="*{password}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
+			</div>
+			<div>
+				<label> Salasana uudelleen: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
+			</div>
+			<!--  <label>Ei-pakolliset:</label><br>
+			<div>
+				<label> Etunimi: <input type="text" th:field="*{fName}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('fName')}" th:errors="*{fName}">First Name Error</p>	
+			</div>
+			<div>
+				<label> Sukunimi: <input type="password" th:field="*{lName}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('lName')}" th:errors="*{lName}">Last Name Error</p>	
+			</div>
+			<div>
+			<label> Sukupuoli:
+				<input type="radio" id="0" name="gender" value="0">
+				<label for="0">Nainen</label>
+				<input type="radio" id="1" name="gender" value="1">
+				<label for="1">Mies</label>
+				<input type="radio" id="2" name="gender" value="2">
+				<label for="2">Muu</label> 
+			</label>
+				<p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}">Gender Error</p>	
+			</div> -->
+			<input type="submit" class="btn btn-primary" value="Rekisteröidy"></input>		
+		</form>
+	</div>
+</div>
+</body>
+</html>

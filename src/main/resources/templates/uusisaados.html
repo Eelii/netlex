@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Uusi säädös</title>
+</head>
+<body>
+
+<div class="container">
+	<h1>Uusi säädös:</h1>
+     <div class="col-md-4">
+		<form th:object="${statuteform}" th:action="@{/savestatute}" action="#" method="post">
+			<div>
+				<label> Säädöksen nimi: <input type="text" th:field="*{shortName}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('shortName')}" th:errors="*{shortName}">Virhe säädöksen nimessä</p>	
+			</div>
+			
+			<div>
+				<label> Säädöksen tyyppi: 
+					<input type="radio" id=0 value="Laki" th:field="*{statuteType}" class="form-control"/>
+					<label for="0">Laki</label>
+					<input type="radio" id=1 value="Asetus" th:field="*{statuteType}" class="form-control"/>
+					<label for="1">Asetus</label>
+				</label>
+				<p th:if="${#fields.hasErrors('statuteType')}" th:errors="*{statuteType}">Virhe säädöksen tyypissä</p>	
+			</div>
+			
+			<div>
+				<label> Vuosi: <input type="text" th:field="*{year}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Vuosilukuvirhe</p>	
+			</div>
+			
+			<div>
+				<label> Numero: <input type="text" th:field="*{num}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('num')}" th:errors="*{num}">Virhe säädöksen numerossa</p>	
+			</div>
+			
+			<div>
+				<label> Kieli: 
+					<input type="radio" id=0 value="suomi" th:field="*{language}" class="form-control"/>
+					<label for="0">suomi</label>
+					<input type="radio" id=1 value="ruotsi" th:field="*{language}" class="form-control"/>
+					<label for="1">ruotsi</label>
+				</label>
+				<p th:if="${#fields.hasErrors('language')}" th:errors="*{language}">Virhe säädöksen kielessä</p>	
+			</div>
+			
+			<input type="submit" class="btn btn-primary" value="Aloita"></input>		
+		</form>
+	</div>
+</div>
+
+
+
+</body>
+</html>
