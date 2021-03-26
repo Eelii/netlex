@@ -13,12 +13,21 @@
 <p>Nimi: </p>
 <p th:text="${statute.fullName}"></p>
 
-<form th:object="${statDbId}" th:action="@{/statDbId}" action="#" method="post">
+	<form th:object="${statDbId}" th:action="@{/statDbId}" action="#" method="post">
+
 			<div>
 				 <input type="hidden" th:value="${statute.statDbId}" th:field="${statute.statDbId}"> 
 			</div>
 			<input type="submit" class="btn btn-primary" value="Uusi pykälä"></input>		
-		</form>-->
+	</form>
+
+	<tr th:each="section : ${sections}">
+			<td th:text="${section.identifier}">Tunnus: </td>
+			<td th:text="${section.heading}">Otsikko: </td>
+			<!--<td><a th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>
+			<td><a th:href="@{/deletebook/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>-->
+			
+	</tr>
 </body>
 </body>
 </html>

@@ -1,12 +1,13 @@
 package site.netlex.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -63,16 +64,19 @@ public class StatuteController {
 	
 	
 	@RequestMapping(value = "/statDbId", method = RequestMethod.POST)
-	public String postStatDbId(@Valid @ModelAttribute("statDbId") Long statDbId) {
+	public String postStatDbId(@Valid @ModelAttribute("statDbId") String statDbId) {
 		
-		return "redirect:/uusipykala/" + String.valueOf(statDbId);
+		return "redirect:/uusipykala?statdbid=" + String.valueOf(statDbId);
 	}
 	
-	@RequestMapping(value = "/uusipykala/{statdbid}", method = RequestMethod.GET)
-	public String createSection(@Valid @ModelAttribute("sectionform") SectionForm sectionForm, @PathVariable("statdbid") Long statDbId, Model model){
-		model.addAttribute("sectionform", new SectionForm());
+	@RequestMapping(value = "/uusipykala", method = RequestMethod.GET)
+	public String createSection(@Valid @ModelAttribute("sectionform") SectionForm sectionForm, BindingResult bindingResult, @RequestParam("statdbid") long statDbId, Model model){
+		System.out.println("STATDBID: " + statDbId);
+		SectionForm newSecForm = new SectionForm();
+		newSecForm.setStatuteDbId(String.valueOf(statDbId));
+		model.addAttribute("sectionform", newSecForm);
 		Optional<Statute> op = statRepository.findById(statDbId);
-		model.addAttribute("statDbId", op.get().getStatDbId());
+		model.addAttribute("statDbId", String.valueOf(statDbId));
 		model.addAttribute("statute", op.get());
 		
 		return "uusipykala";
@@ -80,14 +84,15 @@ public class StatuteController {
 	
 	
 	@RequestMapping(value = "/savesection", method = RequestMethod.POST)
-    public String save(@Valid @ModelAttribute("sectionform") SectionForm sectionForm, BindingResult bindingResult) 	{	
+    public String save(@Valid @ModelAttribute("sectionform") SectionForm sectionForm, @ModelAttribute Section section) 	{	
     			
 		Section newSection = new Section();
 		String statDbId = sectionForm.getStatuteDbId();
-		Statute stat = statRepository.findByStatDbId(statDbId);
+		Statute stat = statRepository.findByStatDbId(Long.parseLong(statDbId));
 		newSection.setStatute(stat);
 		newSection.setIdentifier(sectionForm.getIdentifier());
 		newSection.setHeading(sectionForm.getHeading());
+		secRepository.save(newSection);
     	return "redirect:/muokkaamain/"+sectionForm.getStatuteDbId();
     }    
 	
@@ -95,11 +100,18 @@ public class StatuteController {
 	@RequestMapping(value = "/muokkaamain/{id}", method = RequestMethod.GET)
 	public String editStatute(@PathVariable("id") Long statDbId, Model model) {
 		Optional<Statute> op = statRepository.findById(statDbId);
+		model.addAttribute("sections", op.get().getSections());
 		model.addAttribute("statute", op.get());
 		model.addAttribute("statDbId", op.get().getStatDbId());
 		return "muokkaamain";
 	}
 	
+	@RequestMapping(value = "/muokkaapykala/{secid}", method = RequestMethod.GET)
+	public String editSection(@PathVariable("secid") Long secDbId, Model model) {
+		Optional<Section> op = secRepository.findById(secDbId);
+		model.addAttribute("section", op.get());
+		return "muokkaapykala";
+	}
 	
 	
 }

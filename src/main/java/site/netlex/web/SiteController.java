@@ -2,7 +2,7 @@ package site.netlex.web;
 
 import java.util.Optional;
 
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class SiteController {
 
 	@GetMapping(value="/")
 	public String getMain(Model model){
-		return "main";
+		return "saadoslista";
 	}
 	
 	@RequestMapping(value = "uusisaados", method = RequestMethod.GET)
