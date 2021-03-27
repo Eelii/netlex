@@ -10,4 +10,5 @@ public class NetlexApplication {
 		SpringApplication.run(NetlexApplication.class, args);
 	}
 
+	
 }

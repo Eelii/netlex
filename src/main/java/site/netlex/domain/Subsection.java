@@ -18,16 +18,48 @@ public class Subsection {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String subsDbId;
+	private long subsDbId;
 	private int position;
 	private String text;
 	
 	@ManyToOne
-	@JsonIgnoreProperties ("sections") 
+	@JsonIgnoreProperties ("subsections") 
     @JoinColumn(name = "secDbId")
     private Section section;
-	
+
 	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "paragraph")
 	private ArrayList<Paragraph> paragraphs;*/
+	
+	public long getSubsDbId() {
+		return subsDbId;
+	}
+
+	public void setSubsDbId(long subsDbId) {
+		this.subsDbId = subsDbId;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Section getSection() {
+		return section;
+	}
+
+	public void setSection(Section section) {
+		this.section = section;
+	}
 
 }

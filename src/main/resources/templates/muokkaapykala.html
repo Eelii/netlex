@@ -5,19 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Pykälä: </h1>
-	<p th:value="${statDbId}"></p>
-		<form th:object="${sectionform}" th:action="@{/savesection}" action="#" method="post">
+
+	
+	<h1>Lisää momentti: </h1>
+		<form th:object="${subsecform}" th:action="@{/savesubsection}" action="#" method="post">
 			<div>
-				 <input type="hidden" th:value="${sectionform.statuteDbId}" th:field="${sectionform.statuteDbId}"/> 
-				<label> Otsikko: <input type="text" th:field="*{heading}" class="form-control"/></label>
-				<p th:if="${#fields.hasErrors('heading')}" th:errors="*{heading}">Virhe pykälän otsikossa</p>	
+				<input th:value="*{secDbId}" th:field="*{secDbId}"/> 
+				<input type="text" th:field="*{position}" class="form-control"/>
+				<label> Tekstisisältö: <input type="text" th:field="*{textContent}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('textContent')}" th:errors="*{textContent}">Ei noin!</p>	
 			</div>
-			<div>
-				<label>Pykälän tunnus: <input type="text" th:field="*{identifier}" class="form-control"/></label>
-				<p th:if="${#fields.hasErrors('identifier')}" th:errors="*{identifier}">email Error</p>	
-			</div>
-			<input type="submit" class="btn btn-primary" value="Lisää pykälä"></input>		
-		</form>
+			<input type="submit" class="btn btn-primary" value="Lisää momentti"></input>		
+		</form>	
 </body>
 </html>

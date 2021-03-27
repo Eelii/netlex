@@ -16,7 +16,7 @@ public class Paragraph {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long parDbId;
 	
-	private boolean isPreamble;
+	private boolean isPreamble = false;
 	private int position;
 	private String text;
 	
@@ -24,5 +24,47 @@ public class Paragraph {
 	@JsonIgnoreProperties ("subsections") 
     @JoinColumn(name = "subsDbId")
     private Subsection subsection;
+
+	public long getParDbId() {
+		return parDbId;
+	}
+
+	public void setParDbId(long parDbId) {
+		this.parDbId = parDbId;
+	}
+
+	public boolean isPreamble() {
+		return isPreamble;
+	}
+
+	public void setPreamble(boolean isPreamble) {
+		this.isPreamble = isPreamble;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public Subsection getSubsection() {
+		return subsection;
+	}
+
+	public void setSubsection(Subsection subsection) {
+		this.subsection = subsection;
+	}
+	
+	
 	
 }
