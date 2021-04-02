@@ -78,7 +78,7 @@ public class StatuteController {
 	
 	@RequestMapping(value = "/uusipykala", method = RequestMethod.GET)
 	public String createSection(@Valid @ModelAttribute("sectionform") SectionForm sectionForm, BindingResult bindingResult, @RequestParam("statdbid") long statDbId, Model model){
-		System.out.println("STATDBID: " + statDbId);
+		
 		SectionForm newSecForm = new SectionForm();
 		newSecForm.setStatuteDbId(String.valueOf(statDbId));
 		model.addAttribute("sectionform", newSecForm);
@@ -102,6 +102,12 @@ public class StatuteController {
 		secRepository.save(newSection);
     	return "redirect:/muokkaamain/"+sectionForm.getStatuteDbId();
     }   
+	
+	@RequestMapping(value = "/muokkaamain/{statdbid}/deletesection/{secdbid}", method = RequestMethod.GET)
+	public String deleteBook(@PathVariable("statdbid") Long statDbId, @PathVariable("secdbid") Long secDbId) {
+		secRepository.deleteById(secDbId);
+		return "redirect:/muokkaamain/"+String.valueOf(statDbId);
+	}
 	
 	/*@RequestMapping(value = "/saveparagraph", method = RequestMethod.POST)
     public String savePar(@Valid @ModelAttribute("paragraphform") ParagraphForm paragraphForm, @ModelAttribute Paragraph paragraph) 	{	
@@ -130,9 +136,6 @@ public class StatuteController {
 	{
 		Optional<Section> op = secRepository.findById(Long.parseLong(secDbId));
 		SubsectionForm newSubsForm = new SubsectionForm();
-		System.out.print("ddasfsadgfsadfdsagsdffdsaasfsd!");
-		System.out.println(secDbId);
-		System.out.println(Long.parseLong(secDbId));
 		
 		newSubsForm.setSecDbId(Long.parseLong(secDbId));
 		newSubsForm.setStatDbId(Long.parseLong(statDbId));
@@ -149,16 +152,13 @@ public class StatuteController {
     			
 		Subsection newSubsection = new Subsection();
 		Long secDbId = subsectionForm.getSecDbId();
-		System.out.println(secDbId);
-		System.out.print("SAfadffdsafdsafdfsadfdsa");
-		System.out.println(secRepository.findBySecDbId(secDbId));
 		newSubsection.setSection(secRepository.findBySecDbId(secDbId));
 		newSubsection.setText(subsectionForm.getTextContent());
 
 		Collection <Subsection> subsInSection = newSubsection.getSection().getSubsections();
 		newSubsection.setPosition(subsInSection.size()+1);
 		subsecRepository.save(newSubsection);
-    	return "redirect:/muokkaamain/"+String.valueOf(secRepository.findBySecDbId(secDbId).getStatute().getStatDbId());
+    	return "redirect:/muokkaapykala?statid=" + String.valueOf(secRepository.findBySecDbId(secDbId).getStatute().getStatDbId())+"&secid="+String.valueOf(secDbId);
     }  
 	
 	

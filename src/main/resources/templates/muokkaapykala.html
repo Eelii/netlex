@@ -5,17 +5,29 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-
+	<p>Pykälätunnus: <p th:utext=*{section.identifier}></p> </p>
+	<p>Otsikko: <p th:utext=*{section.heading}></p> </p>
+	
+	<tr th:each="subsection:${section.subsections}">
+			<p>Mom. sija: <td th:text="${subsection.position}"></td></p>
+			<td th:text="${subsection.text}"></td>
+			<br>
+			<br>
+			<!--<td><a th:href="@{/editbook/{id}(id=${book.id})}">Edit</a></td>-->
+			<!-- Huom. sec html-tagissa -->
+			<!--<td sec:authorize='hasAuthority("ADMIN")'><a th:href="@{/deletebook/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>-->		
+	</tr>
 	
 	<h1>Lisää momentti: </h1>
 		<form th:object="${subsecform}" th:action="@{/savesubsection}" action="#" method="post">
 			<div>
-				<input th:value="*{secDbId}" th:field="*{secDbId}"/> 
-				<input type="text" th:field="*{position}" class="form-control"/>
+				<input type="hidden" th:value="*{secDbId}" th:field="*{secDbId}"/> 
+				<input type="hidden" th:field="*{position}" class="form-control"/>
 				<label> Tekstisisältö: <input type="text" th:field="*{textContent}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('textContent')}" th:errors="*{textContent}">Ei noin!</p>	
 			</div>
 			<input type="submit" class="btn btn-primary" value="Lisää momentti"></input>		
 		</form>	
+		<a th:href="@{/muokkaamain/{statid}(statid=${strStatDbId})}">Takaisin</a>
 </body>
 </html>

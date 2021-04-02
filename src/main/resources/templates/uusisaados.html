@@ -26,12 +26,12 @@
 			</div>
 			
 			<div>
-				<label> Vuosi: <input type="text" th:field="*{year}" class="form-control" /></label>
+				<label> Vuosi: <input type="number" th:field="*{year}" class="form-control" /></label>
 				<p th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Vuosilukuvirhe</p>	
 			</div>
 			
 			<div>
-				<label> Numero: <input type="text" th:field="*{num}" class="form-control"/></label>
+				<label> Numero: <input type="number" th:field="*{num}" class="form-control"/></label>
 				<p th:if="${#fields.hasErrors('num')}" th:errors="*{num}">Virhe säädöksen numerossa</p>	
 			</div>
 			
