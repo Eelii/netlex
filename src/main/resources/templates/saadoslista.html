@@ -7,14 +7,15 @@
 <body>
 <h1>SÄÄDÖKSET:</h1>
 <tr th:each="statute:${statutes}">
+			<br><br>
 			<td th:text="${statute.fullName}"></td>
 			<td th:text="${statute.statuteId}"></td>
-			<br>
-			<td><a th:href="@{/muokkaamain/{statid}(statid={statute.statDbId})">Muokkaa</a></td>
+			<td><a th:href="@{/muokkaamain/{statid}(statid=${statute.statDbId})}">Muokkaa</a></td>
 			<!--<td><a th:href="@{/poistasaados/{statid}(statid=*{statute.statDbId})" class="btn btn-danger">Poista</a></td>-->
 			
 			
 	</tr>
+	<br><br><br>
 <a href="/uusisaados" class="btn btn-success">Uusi säädös</a>
 
 </body>

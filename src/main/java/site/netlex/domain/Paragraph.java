@@ -1,5 +1,6 @@
 package site.netlex.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,12 +17,13 @@ public class Paragraph {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long parDbId;
 	
-	private boolean isPreamble = false;
+	private boolean isPreamble;
 	private int position;
+	@Column(length=8000)
 	private String text;
 	
 	@ManyToOne
-	@JsonIgnoreProperties ("subsections") 
+	@JsonIgnoreProperties ("paragraphs") 
     @JoinColumn(name = "subsDbId")
     private Subsection subsection;
 

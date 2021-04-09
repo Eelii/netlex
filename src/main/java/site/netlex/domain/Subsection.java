@@ -1,8 +1,10 @@
 package site.netlex.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class Subsection {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long subsDbId;
 	private int position;
+	@Column(length=8000)
 	private String text;
 	
 	@ManyToOne
@@ -27,8 +30,8 @@ public class Subsection {
     @JoinColumn(name = "secDbId")
     private Section section;
 
-	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "paragraph")
-	private ArrayList<Paragraph> paragraphs;*/
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "subsection")
+	private List<Paragraph> paragraphs;
 	
 	public long getSubsDbId() {
 		return subsDbId;
@@ -62,4 +65,13 @@ public class Subsection {
 		this.section = section;
 	}
 
+	public List<Paragraph> getParagraphs() {
+		return paragraphs;
+	}
+
+	public void setParagraphs(List<Paragraph> paragraphs) {
+		this.paragraphs = paragraphs;
+	}
+
+	
 }

@@ -26,7 +26,30 @@
     #lisaanappula {
     float: right;
     }
+    #allSectionsDiv {
+    background-color: brown;
+    }
+    #sectionDiv {
+    background-color: Beige;
+    }
+    #sectionHeadingDiv{
+    background-color: DarkMagenta;
+    height: 200%;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 20px;
     
+    }
+    #subsecDiv {
+    background-color: BlanchedAlmond;
+    margin-top: 5px;
+    }
+    #paragraphText {
+    background-color: BlanchedAlmond;
+    margin-top: 1px;
+    margin-left: 25px;
+    
+    }
     </style>
 </head>
 <body>
@@ -52,16 +75,30 @@
 </form>
 </div>
 
-	<tr th:each="section : ${sections}">
-			<td th:text="${section.identifier}">Tunnus: </td>
-			<td th:text="${section.heading}">Otsikko: </td>
-			<td><a th:href="@{/muokkaapykala?statid={statid}&secid={secid}(statid=${statute.statDbId}, secid=${section.secDbId})}">Muokkaa</a></td>
-			<td><a th:href="@{/muokkaamain/{statid}/deletesection/{secid}(statid=*{statute.statDbId}, secid=${section.secDbId})}" class="btn btn-danger">Poista</a></td>
-				<p th:each="subsection : ${section?.subsections}">
+<div id=allSectionsDiv>
+	<div th:each="section : ${sections}">
+			
+			<div id=sectionDiv>
+			<div id=sectionHeadingDiv>
+			<span th:text="${section.identifier}">Tunnus: </span>
+			<span th:text="${section.heading}">Otsikko: </span>
+			</div>
+			<!-- <td><a th:href="@{/muokkaapykala?statid={statid}&secid={secid}(statid=${statute.statDbId}, secid=${section.secDbId})}">Muokkaa</a></td>
+			<td><a th:href="@{/muokkaamain/{statid}/deletesection/{secid}(statid=*{statute.statDbId}, secid=${section.secDbId})}" class="btn btn-danger">Poista</a></td>-->
+				<div id=subsecDiv th:each="subsection : ${section?.subsections}">
 					<span th:text="${subsection?.text}"></span>
+						<div th:each="paragraph : ${subsection?.paragraphs}">
+							<div id=paragraphDiv th:switch="${paragraph?.isPreamble}">
+							<span id=paragraphPreamble th:case="${true}" th:text="${paragraph?.text}"></span>
+							<span id=paragraphText th:case="${false}" th:text="${paragraph?.text}"></span>
+							</div>
+						</div>
+					</div>
 					<br>
-				</p>
-	</tr>
+				
+			</div>
+	</div>
+</div>
 
 <p id="pathname"></p>
 <p id="url"></p>

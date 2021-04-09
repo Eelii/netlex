@@ -25,7 +25,7 @@ public class SiteController {
 	
 	@GetMapping(value="/")
 	public String getMain(Model model){
-		return "saadoslista";
+		return "main";
 	}
 	
 	@RequestMapping(value = "uusisaados", method = RequestMethod.GET)

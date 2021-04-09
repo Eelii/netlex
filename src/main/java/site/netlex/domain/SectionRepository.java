@@ -7,11 +7,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 public interface SectionRepository extends CrudRepository<Section, Long>{
-	Section findBySecDbId(Long secDbId);
+	Section findBySecDbId(long secDbId);
 	@Query("SELECT s FROM Section s WHERE s.statute = ?1")
-	List <Section> findByStatDbId(Long statDbId);
+	List <Section> findByStatDbId(long statDbId);
 	@Query("SELECT s.secDbId FROM Section s WHERE s.statute.statDbId = ?1 and s.identifier = ?2")
-	Long findSectionIdByIdentifierAndStatDbId(Long statDbId, String identifier);
+	long findSectionIdByIdentifierAndStatDbId(long statDbId, String identifier);
 	
 	
 }

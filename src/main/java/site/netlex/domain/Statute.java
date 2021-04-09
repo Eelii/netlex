@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,9 +22,11 @@ public class Statute {
 	private int num;
 	private int year;
 	private String statuteId;
+	@Column(length=1000)
 	private String shortName;
 	private String statuteType;
 	private String documentType;
+	@Column(length=1000)
 	private String fullName;
 	private String language;
 	

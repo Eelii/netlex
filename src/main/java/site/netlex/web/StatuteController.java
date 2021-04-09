@@ -42,7 +42,7 @@ public class StatuteController {
 	private SubsectionRepository subsecRepository;
 	
 	@RequestMapping(value = "savestatute", method = RequestMethod.POST)
-	    public String save(@Valid @ModelAttribute("statuteform") StatuteForm statuteForm, BindingResult bindingResult) 	{	
+	public String save(@Valid @ModelAttribute("statuteform") StatuteForm statuteForm, BindingResult bindingResult) 	{	
 	    			
 			    	Statute newStatute = new Statute();
 			    	newStatute.setNum(Integer.parseInt(statuteForm.getNum()));
@@ -104,7 +104,7 @@ public class StatuteController {
     }   
 	
 	@RequestMapping(value = "/muokkaamain/{statdbid}/deletesection/{secdbid}", method = RequestMethod.GET)
-	public String deleteBook(@PathVariable("statdbid") Long statDbId, @PathVariable("secdbid") Long secDbId) {
+	public String deleteSection(@PathVariable("statdbid") Long statDbId, @PathVariable("secdbid") Long secDbId) {
 		secRepository.deleteById(secDbId);
 		return "redirect:/muokkaamain/"+String.valueOf(statDbId);
 	}
