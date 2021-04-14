@@ -96,10 +96,17 @@ public class Statute {
 		this.sections = sections;
 	}
 	
+	public Statute() {
+		super();
+	}
+	
 	public void initStatute() {
 		this.fullName = this.statuteType + " " + this.shortName;
 		this.statuteId = this.num + "/" + this.year; 
 	}
+	
+	
+	
 	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
 	private ArrayList<Section> sections;*/
 	

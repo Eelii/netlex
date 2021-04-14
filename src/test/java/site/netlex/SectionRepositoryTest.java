@@ -25,6 +25,6 @@ public class SectionRepositoryTest {
 		Section newSec = new Section();
 		newSec.setHeading("Tietokannan testaaminen");
 		newSec.setIdentifier("4b§");
-		
 	}
+	
 }

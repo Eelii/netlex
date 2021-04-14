@@ -3,16 +3,40 @@
 <head>
     <title>Login</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style>
+    #saados{
+    font-size: 20px;
+    width: 70%;
+    background-color: DarkOrchid;
+    color: white;
+    }
+    #tunnus{
+    position: relative;
+    float: right;
+    }
+    #viiva{
+    background-color: black;
+    height: 1px;
+    width: 100%;
+    }
+    </style>
+    
+    	
+ 
 </head>
 <body>
 <h1>SÄÄDÖKSET:</h1>
 <tr th:each="statute:${statutes}">
 			<br><br>
+			<div id=saados>
 			<td th:text="${statute.fullName}"></td>
+			</div>
+			<div id=tunnus>
 			<td th:text="${statute.statuteId}"></td>
+			</div>
 			<td><a th:href="@{/muokkaamain/{statid}(statid=${statute.statDbId})}">Muokkaa</a></td>
-			<!--<td><a th:href="@{/poistasaados/{statid}(statid=*{statute.statDbId})" class="btn btn-danger">Poista</a></td>-->
-			
+			<td><a th:href="@{/delete/statute/{statdbid}(statdbid=*{statute.statDbId})}">Poista</a></td>
+			<div id=viiva></div>
 			
 	</tr>
 	<br><br><br>

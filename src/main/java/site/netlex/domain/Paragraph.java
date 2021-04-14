@@ -66,7 +66,9 @@ public class Paragraph {
 	public void setSubsection(Subsection subsection) {
 		this.subsection = subsection;
 	}
-	
-	
+
+	public Paragraph() {
+		super();
+	}
 	
 }

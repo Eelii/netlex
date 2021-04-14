@@ -22,7 +22,6 @@ public class Section {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long secDbId;
 	
-	
 	private String identifier;
 	//private String classification; ????
 	private String heading;
@@ -74,6 +73,10 @@ public class Section {
 
 	public void setSubsections(List<Subsection> subsections) {
 		this.subsections = subsections;
+	}
+
+	public Section() {
+		super();
 	}
 	
 	

@@ -103,6 +103,12 @@ public class StatuteController {
     	return "redirect:/muokkaamain/"+sectionForm.getStatuteDbId();
     }   
 	
+	@RequestMapping(value = "/delete/statute/{statdbid}", method = RequestMethod.GET)
+	public String deleteStatute(@PathVariable("statdbid") Long statDbId) {
+		statRepository.deleteById(statDbId);
+		return "redirect:/saadokset";
+	} 
+	
 	@RequestMapping(value = "/muokkaamain/{statdbid}/deletesection/{secdbid}", method = RequestMethod.GET)
 	public String deleteSection(@PathVariable("statdbid") Long statDbId, @PathVariable("secdbid") Long secDbId) {
 		secRepository.deleteById(secDbId);

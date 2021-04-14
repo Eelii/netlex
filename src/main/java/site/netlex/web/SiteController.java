@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import site.netlex.domain.SectionForm;
+import site.netlex.domain.SignupForm;
 import site.netlex.domain.Statute;
 import site.netlex.domain.StatuteForm;
 import site.netlex.domain.StatuteRepository;
@@ -33,6 +33,23 @@ public class SiteController {
     	model.addAttribute("statuteform", new StatuteForm());
         return "uusisaados";
     }	
+	
+	@RequestMapping(value = "kirjaudu", method = RequestMethod.GET)
+    public String login(){
+        return "kirjaudu";
+    }
+	
+	@RequestMapping(value = "rekisteroidy", method = RequestMethod.GET)
+    public String signupGet(Model model){
+		model.addAttribute("signupform", new SignupForm());
+        return "rekisteroidy";
+    }	
+	
+	@RequestMapping(value = "rekisteroidy", method = RequestMethod.POST)
+    public String signupPost(){
+        return "rekisteroidy";
+    }	
+	
 	
 	@GetMapping(value="/saadokset")
 	//@PreAuthorize("hasAuthority('USER')")

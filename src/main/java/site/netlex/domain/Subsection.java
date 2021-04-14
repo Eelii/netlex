@@ -73,5 +73,8 @@ public class Subsection {
 		this.paragraphs = paragraphs;
 	}
 
-	
+	public Subsection() {
+		super();
+	}
+
 }

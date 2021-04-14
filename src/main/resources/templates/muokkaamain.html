@@ -28,6 +28,7 @@
     }
     #allSectionsDiv {
     background-color: brown;
+    width: 50%;
     }
     #sectionDiv {
     background-color: Beige;
@@ -38,7 +39,6 @@
     margin-bottom: 5px;
     color: white;
     font-size: 20px;
-    
     }
     #subsecDiv {
     background-color: BlanchedAlmond;
@@ -47,8 +47,7 @@
     #paragraphText {
     background-color: BlanchedAlmond;
     margin-top: 1px;
-    margin-left: 25px;
-    
+    text-align:center;
     }
     </style>
 </head>
@@ -83,15 +82,16 @@
 			<span th:text="${section.identifier}">Tunnus: </span>
 			<span th:text="${section.heading}">Otsikko: </span>
 			</div>
-			<!-- <td><a th:href="@{/muokkaapykala?statid={statid}&secid={secid}(statid=${statute.statDbId}, secid=${section.secDbId})}">Muokkaa</a></td>
-			<td><a th:href="@{/muokkaamain/{statid}/deletesection/{secid}(statid=*{statute.statDbId}, secid=${section.secDbId})}" class="btn btn-danger">Poista</a></td>-->
+			<td><a th:href="@{/muokkaapykala?statid={statid}&secid={secid}(statid=${statute.statDbId}, secid=${section.secDbId})}">Muokkaa</a></td>
+			<td><a th:href="@{/muokkaamain/{statid}/deletesection/{secid}(statid=*{statute.statDbId}, secid=${section.secDbId})}">Poista</a></td>
 				<div id=subsecDiv th:each="subsection : ${section?.subsections}">
 					<span th:text="${subsection?.text}"></span>
+						<br>
 						<div th:each="paragraph : ${subsection?.paragraphs}">
 							<div id=paragraphDiv th:switch="${paragraph?.isPreamble}">
 							<span id=paragraphPreamble th:case="${true}" th:text="${paragraph?.text}"></span>
 							<span id=paragraphText th:case="${false}" th:text="${paragraph?.text}"></span>
-							</div>
+							</div><br>
 						</div>
 					</div>
 					<br>
@@ -114,7 +114,7 @@ document.getElementById("origin").innerHTML = "orgin: " + origin;
 
 $(document).ready(function(){
   $("button").click(function(){
-    $("#div1").load("");
+    $("#div1").load("/saadokset");
   });
 });
 
