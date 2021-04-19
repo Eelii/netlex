@@ -114,14 +114,13 @@ document.getElementById("origin").innerHTML = "orgin: " + origin;
 
 $(document).ready(function(){
   $("button").click(function(){
-    $("#div1").load("/saadokset");
+    $("#div1").load("/api/saadokset",'application/json');
   });
 });
 
 </script>
 
-</head>
-<body>
+
 
 <div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
 

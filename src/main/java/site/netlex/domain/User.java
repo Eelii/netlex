@@ -33,7 +33,7 @@ public class User {
 	private String lName;
 	
 	@Column(name="gender")
-	private int gender;
+	private int gender = 4;
 
 	
 //------------Constructors-----------------------------------------------
@@ -56,6 +56,18 @@ public class User {
 		this.gender = gender;
 	}
 	
+	public User(String username, String passwordHash, String role, String email, String fName, String lName,
+			int gender) {
+		super();
+		this.username = username;
+		this.passwordHash = passwordHash;
+		this.role = role;
+		this.email = email;
+		this.fName = fName;
+		this.lName = lName;
+		this.gender = gender;
+	}
+
 	public User(Long id, String username, String passwordHash, String role, String email) {
 		super();
 		this.id = id;
@@ -132,7 +144,5 @@ public class User {
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
-	
-	
 	
 }

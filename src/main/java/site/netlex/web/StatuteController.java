@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,6 +42,7 @@ public class StatuteController {
 	@Autowired
 	private SubsectionRepository subsecRepository;
 	
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@RequestMapping(value = "savestatute", method = RequestMethod.POST)
 	public String save(@Valid @ModelAttribute("statuteform") StatuteForm statuteForm, BindingResult bindingResult) 	{	
 	    			
@@ -52,13 +54,6 @@ public class StatuteController {
 			    	newStatute.setLanguage(statuteForm.getLanguage());
 			    	newStatute.initStatute();
 			    	
-			    	/*System.out.print(signupForm.getGender());
-			    	
-			    	//-------------------------------------
-			    	newUser.setfName(signupForm.getfName());
-			    	newUser.setlName(signupForm.getlName());
-			    	newUser.setGender(signupForm.getGender());*/
-			    	
 			    	if (statRepository.findByStatuteId(statuteForm.getStatuteId()) == null) {
 			    		statRepository.save(newStatute);
 			    	}
@@ -69,13 +64,14 @@ public class StatuteController {
 	    	return "redirect:/muokkaamain/" + newStatute.getStatDbId();
 	    }    
 	
-	
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@RequestMapping(value = "/statDbId", method = RequestMethod.POST)
 	public String postStatDbId(@Valid @ModelAttribute("statDbId") String statDbId) {
 		
 		return "redirect:/uusipykala?statdbid=" + String.valueOf(statDbId);
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@RequestMapping(value = "/uusipykala", method = RequestMethod.GET)
 	public String createSection(@Valid @ModelAttribute("sectionform") SectionForm sectionForm, BindingResult bindingResult, @RequestParam("statdbid") long statDbId, Model model){
 		
@@ -89,7 +85,7 @@ public class StatuteController {
 		return "uusipykala";
 	}
 	
-	
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@RequestMapping(value = "/savesection", method = RequestMethod.POST)
     public String saveSec(@Valid @ModelAttribute("sectionform") SectionForm sectionForm, @ModelAttribute Section section) 	{	
     			
@@ -103,17 +99,21 @@ public class StatuteController {
     	return "redirect:/muokkaamain/"+sectionForm.getStatuteDbId();
     }   
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/delete/statute/{statdbid}", method = RequestMethod.GET)
 	public String deleteStatute(@PathVariable("statdbid") Long statDbId) {
 		statRepository.deleteById(statDbId);
 		return "redirect:/saadokset";
 	} 
 	
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/muokkaamain/{statdbid}/deletesection/{secdbid}", method = RequestMethod.GET)
 	public String deleteSection(@PathVariable("statdbid") Long statDbId, @PathVariable("secdbid") Long secDbId) {
 		secRepository.deleteById(secDbId);
 		return "redirect:/muokkaamain/"+String.valueOf(statDbId);
 	}
+	
+	//TODO -- Under construction ☣ ---------------------------------------------------------------------
 	
 	/*@RequestMapping(value = "/saveparagraph", method = RequestMethod.POST)
     public String savePar(@Valid @ModelAttribute("paragraphform") ParagraphForm paragraphForm, @ModelAttribute Paragraph paragraph) 	{	
@@ -127,6 +127,9 @@ public class StatuteController {
     	return "redirect:/muokkaamain/"+sectionForm.getStatuteDbId();
     }  */
 	
+	//---------------------------------------------------------------------
+	
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@RequestMapping(value = "/muokkaamain/{id}", method = RequestMethod.GET)
 	public String editStatute(@PathVariable("id") Long statDbId, Model model) {
 		Optional<Statute> op = statRepository.findById(statDbId);
@@ -136,6 +139,7 @@ public class StatuteController {
 		return "muokkaamain";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@RequestMapping(value = "/muokkaapykala", method = RequestMethod.GET)
 	public String editSection(@RequestParam(name="statid", required = true) String statDbId, 
 	@RequestParam(name="secid", required = true) String secDbId, @Valid @ModelAttribute("subsectionform") SubsectionForm subsectionForm, Model model) 
@@ -153,6 +157,7 @@ public class StatuteController {
 		return "/muokkaapykala";
 	}
 	
+	@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
 	@RequestMapping(value = "/savesubsection", method = RequestMethod.POST)
     public String saveSubsec(@Valid @ModelAttribute("subsecform") SubsectionForm subsectionForm, @ModelAttribute Subsection subsection) 	{	
     			

@@ -13,5 +13,4 @@ public interface SectionRepository extends CrudRepository<Section, Long>{
 	@Query("SELECT s.secDbId FROM Section s WHERE s.statute.statDbId = ?1 and s.identifier = ?2")
 	long findSectionIdByIdentifierAndStatDbId(long statDbId, String identifier);
 	
-	
 }

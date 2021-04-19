@@ -1,6 +1,7 @@
 package site.netlex.web;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import site.netlex.domain.Paragraph;
@@ -34,6 +36,11 @@ public class StatuteRestController {
 	
 	@Autowired
 	ParagraphRepository paraRepo;
+	
+	@GetMapping("/saadokset")
+	public @ResponseBody List<Statute> bookListRest(){
+		return(List<Statute>) statRepo.findAll();
+	}     
 	
 	@GetMapping("/saados/{statid}")
 	public Statute getStatute(@PathVariable long statid) {
@@ -67,6 +74,8 @@ public class StatuteRestController {
 		if (heading.isEmpty() && identifier.isEmpty()) {
 			newSec.setHeading("Voimaantulosäännös");
 			newSec.setIdentifier("hello");
+			//Database identifier of a statute is defined server-side, which is why a POSTed statute can only be identified by its statute identifier (num/year). 
+			//Statute identifiers are not yet set to be unique, which is why searching a statute can currently be prone to error. 
 			Statute refStat = statRepo.findByStatuteId(statuteId);
 			newSec.setStatute(refStat);
 			secRepo.save(newSec);
@@ -88,6 +97,7 @@ public class StatuteRestController {
 		
 		Subsection newSubs = new Subsection();
 		newSubs.setText(text);
+		//Similalry to searching a statute by statute id, searching a section needs an adequate error handling. 
 		Long secDbId = secRepo.findSectionIdByIdentifierAndStatDbId(statRepo.findByStatuteId(statuteId).getStatDbId(), secIdentifier);
 		newSubs.setSection(secRepo.findBySecDbId(secDbId));
 		
@@ -103,7 +113,7 @@ public class StatuteRestController {
 		Paragraph newPara = new Paragraph();
 		newPara.setText(text);
 		newPara.setPosition(paragraphPosition);
-		newPara.setPreamble(isPreamble);
+		newPara.setPreamble(isPreamble); 
 		Long secDbId = secRepo.findSectionIdByIdentifierAndStatDbId(statRepo.findByStatuteId(statuteId).getStatDbId(), secIdentifier);
 		Long subsecId = subsecRepo.findBySectionDbIdAndSubsPosition(secDbId, subsecPosition);
 		Subsection newParaSubsec = subsecRepo.findById(subsecId).get();

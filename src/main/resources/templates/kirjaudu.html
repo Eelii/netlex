@@ -4,7 +4,7 @@
     <title>Kirjaudu sisään</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     
-    <!-- Babylon.js -->
+    	<!-- Babylon.js dependencies -->
         <script src="https://code.jquery.com/pep/0.4.2/pep.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
         <script src="https://preview.babylonjs.com/ammo.js"></script>
@@ -65,24 +65,24 @@
 	<div th:if="${param.error}">Väärä käyttäjätunnus ja salasana. </div>
 	<div id=loginLineTop></div>
 	<div id="loginDiv">
-		<form th:action="@{/login}"method="post">
+	<form th:action="@{/login}"method="post">
 		<div id=loginUser>
 			<label>Käyttäjätunnus: <input type="text"name="username"/></label>
 		</div>
 		<div id=loginPassword>
 			<label>Salasana: <input type="password"name="password"/></label>
 		</div>
-		<div>
-	</div>
 	<input type="submit"value="Kirjaudu sisään"/>
+	</form>
 	</div>
 	<a th:href="@{/rekisteroidy}">Rekisteröidy</a>
 	
-	</form>
 	<canvas id="renderCanvas"></canvas>
 	
 <script>
-//BABYLON--------------------------------------------------------------------------------------------
+
+//------------------BABYLON JS----------------------------------------------------------------------------------------
+
 var canvas = document.getElementById("renderCanvas");
 
 var engine = null;
@@ -186,6 +186,6 @@ window.addEventListener("resize", function () {
 });
 	
 	</script>
-	
+
 </body>
 </html>

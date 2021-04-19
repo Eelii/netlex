@@ -14,6 +14,8 @@ import site.netlex.domain.Statute;
 import site.netlex.domain.StatuteRepository;
 import site.netlex.domain.Subsection;
 import site.netlex.domain.SubsectionRepository;
+import site.netlex.domain.User;
+import site.netlex.domain.UserRepository;
 
 @SpringBootApplication
 public class NetlexApplication {
@@ -22,11 +24,14 @@ public class NetlexApplication {
 		SpringApplication.run(NetlexApplication.class, args);
 	}
 
-	@Bean public CommandLineRunner demo(StatuteRepository statRepo, SectionRepository secRepo, SubsectionRepository subsecRepo) {
+	@Bean public CommandLineRunner demo(StatuteRepository statRepo, SectionRepository secRepo, SubsectionRepository subsecRepo, UserRepository userRepo) {
 		return (args) ->{
 			
 
-			Statute testStatute = new Statute();
+			//An alternative test statute. Currently statutes and all their subparts are created within every test class.
+			//Test classes will need new assertions if test statute(s) are to be created in command line runner.
+			
+			/*Statute testStatute = new Statute();
 			testStatute.setYear(9999);
 			testStatute.setNum(999);
 			testStatute.setLanguage("suomi");
@@ -43,7 +48,6 @@ public class NetlexApplication {
 			List<Section> secList = new ArrayList<Section>();
 			secList.add(testSection);
 			testStatute.setSections(secList);
-			
 			
 			
 			Subsection testSubsection1 = new Subsection();
@@ -64,10 +68,10 @@ public class NetlexApplication {
 			List<Subsection> subsList = new ArrayList<Subsection>();
 			subsList.add(testSubsection1);
 			subsList.add(testSubsection2);
-			testSection.setSubsections(subsList);
+			testSection.setSubsections(subsList);*/
 			
-			System.out.println("STATDB IS: " + statRepo.findDbIdByStatId("999/9999"));
-			System.out.println(secRepo.findSectionIdByIdentifierAndStatDbId(statRepo.findByStatuteId("999/9999").getStatDbId(), "99§"));
+			User admin = new User("admin", "$2a$04$Az7Ii0qveCIyVHtGlFm5Mu2gEnEDHZIkqlamOFiIj1msFhwv1A31q", "ADMIN", "yllapito@valtio.fi", "Aada", "Admini", 0);
+			userRepo.save(admin);
 		};
 	}
 }

@@ -17,8 +17,11 @@ public class Paragraph {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long parDbId;
 	
+	//isPreamble boolean isn't really necessary since isPreamble should always be true when position is 0, but could maybe used as a sanity check
+	//when processing statutes received via POST request. 
 	private boolean isPreamble;
 	private int position;
+	
 	@Column(length=8000)
 	private String text;
 	
