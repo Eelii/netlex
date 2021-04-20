@@ -1,6 +1,5 @@
 package site.netlex.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -23,7 +22,6 @@ public class Section {
 	private long secDbId;
 	
 	private String identifier;
-	//private String classification; ????
 	private String heading;
 	
 	@ManyToOne
@@ -31,7 +29,6 @@ public class Section {
     @JoinColumn(name = "statDbId")
     private Statute statute;
 	
-	//TODO
 	@OneToMany (cascade = CascadeType.ALL, mappedBy = "section")
 	private List<Subsection> subsections;
 	
@@ -78,14 +75,5 @@ public class Section {
 	public Section() {
 		super();
 	}
-	
-	
-	
-	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "subsection")
-	private ArrayList<Subsection> subsections;*/
-	
-	
-	
-	
-	
+		
 }

@@ -31,7 +31,7 @@ public class NetlexApplication {
 			//An alternative test statute. Currently statutes and all their subparts are created within every test class.
 			//Test classes will need new assertions if test statute(s) are to be created in command line runner.
 			
-			/*Statute testStatute = new Statute();
+			Statute testStatute = new Statute();
 			testStatute.setYear(9999);
 			testStatute.setNum(999);
 			testStatute.setLanguage("suomi");
@@ -68,7 +68,7 @@ public class NetlexApplication {
 			List<Subsection> subsList = new ArrayList<Subsection>();
 			subsList.add(testSubsection1);
 			subsList.add(testSubsection2);
-			testSection.setSubsections(subsList);*/
+			testSection.setSubsections(subsList);
 			
 			User admin = new User("admin", "$2a$04$Az7Ii0qveCIyVHtGlFm5Mu2gEnEDHZIkqlamOFiIj1msFhwv1A31q", "ADMIN", "yllapito@valtio.fi", "Aada", "Admini", 0);
 			userRepo.save(admin);

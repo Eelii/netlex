@@ -1,7 +1,5 @@
 package site.netlex.domain;
 
-import javax.validation.constraints.NotEmpty;
-
 public class SubsectionForm {
 
 	private Long statDbId;

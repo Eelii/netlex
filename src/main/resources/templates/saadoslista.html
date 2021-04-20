@@ -14,6 +14,17 @@
     position: relative;
     float: right;
     }
+    #saadoslaskuri{
+    float:right;
+    background-color: OldLace;
+    width: 200px;
+    }
+    #statuteCount{
+    size: 10px;
+    margin-top: 17px;
+    margin-right: 15px;
+    float:right;
+    }
     #viiva{
     background-color: black;
     height: 1px;
@@ -26,6 +37,11 @@
 </head>
 <body>
 <h1>SÄÄDÖKSET:</h1>
+<div id=saadoslaskuri>
+<p style="float:left">Säädöksiä tietokannassa:</p>
+<div id=statuteCount></div> 
+</div>
+
 <tr th:each="statute:${statutes}">
 			<br><br>
 			<div id=saados>
@@ -35,7 +51,7 @@
 			<td th:text="${statute.statuteId}"></td>
 			</div>
 			<td><a th:href="@{/muokkaamain/{statid}(statid=${statute.statDbId})}">Muokkaa</a></td>
-			<td><a th:href="@{/delete/statute/{statdbid}(statdbid=*{statute.statDbId})}">Poista</a></td>
+			<td sec:authorize='hasAuthority("ADMIN")'><a th:href="@{/delete/statute/{statdbid}(statdbid=*{statute.statDbId})}">Poista</a></td>
 			<div id=viiva></div>
 			
 	</tr>
@@ -50,50 +66,42 @@
 -->
 
 
-<table id=saadostauluHead>
-<thead>
-<th>Säädös</th>
-<th>Tunnus</th>
-</thead>
-<tbody id=saadostauluBody></tbody>
-</table>
-<p id="timer"></p>
 <!-- Getting jQuery script from an external source. -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+/*
 var pathname = window.location.pathname; // Returns path only (/path/example.html)
 var url      = window.location.href;     // Returns full URL (https://example.com/path/example.html)
 var origin   = window.location.origin;   // Returns base URL (https://example.com)
 document.getElementById("pathname").innerHTML = "pathname: " + pathname;
 document.getElementById("url").innerHTML = "url: " + url;
 document.getElementById("origin").innerHTML = "orgin: " + origin;
+*/
 
 
-var start = new Date;
+//Real time statute counter using AJAX
 
-setInterval(function() {
-    $('#timer').text((new Date - start) / 1000 + " Seconds");
-}, 1000);
-
-	
 $(document).ready(function(){
-	  $("button").click(function(){
-		  $.getJSON("localhost:8080/api/saadokset", function(data){
-
-			    $(data).each(function(i, statute){
-			        $('#saadostauluBody').append($("<tr>")
-			            .append($("<td>").append(statute.fullName))
-			            .append($("<td>").append(statute.statId)))
-			    });
-			})
-	  });
+	setInterval(function() {
+		$.ajax({ 
+			
+		    type: 'GET', 
+		    url: '/api/saadokset',  
+		    dataType: 'json',
+		    success: function (data) { 
+				var count = 0;
+		        $.each(data, function(index, element) {
+		        	count += 1;
+		        	document.getElementById("statuteCount").innerHTML = count;   
+		        });
+		    }
+		});
+	}, 5000); 
 	});
 
 
 </script>
 
-<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
 
-<button>Get External Content</button>
 </body>
 </html>
