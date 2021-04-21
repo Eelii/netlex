@@ -7,7 +7,7 @@
     <style>
     #topBanner {
     height: 80px;
-    background-color: MistyRose;
+    background-color: Wheat;
     position: -webkit-sticky; /* Safari */
  	position: sticky;
   	top: 0;
@@ -83,7 +83,7 @@
 			<span th:text="${section.heading}">Otsikko: </span>
 			</div>
 			<td><a th:href="@{/muokkaapykala?statid={statid}&secid={secid}(statid=${statute.statDbId}, secid=${section.secDbId})}">Muokkaa</a></td>
-			<td><a th:href="@{/muokkaamain/{statid}/deletesection/{secid}(statid=*{statute.statDbId}, secid=${section.secDbId})}">Poista</a></td>
+			<td sec:authorize='hasAuthority("ADMIN")'><a th:href="@{/muokkaamain/{statid}/deletesection/{secid}(statid=*{statute.statDbId}, secid=${section.secDbId})}">Poista</a></td>
 				<div id=subsecDiv th:each="subsection : ${section?.subsections}">
 					<span th:text="${subsection?.text}"></span>
 						<br>
