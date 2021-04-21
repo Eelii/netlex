@@ -69,9 +69,11 @@ public class NetlexApplication {
 			subsList.add(testSubsection1);
 			subsList.add(testSubsection2);
 			testSection.setSubsections(subsList);
+			*/
+			
 			
 			User admin = new User("admin", "$2a$04$Az7Ii0qveCIyVHtGlFm5Mu2gEnEDHZIkqlamOFiIj1msFhwv1A31q", "ADMIN", "yllapito@valtio.fi", "Aada", "Admini", 0);
-			userRepo.save(admin);*/
+			userRepo.save(admin);
 		};
 	}
 }
