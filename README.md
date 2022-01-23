@@ -6,14 +6,14 @@
 
 Netlex on Java-kielinen, Spring-kehikolle perustuva Finlex-sivuston jäljitelmä. Ohjelman selainkäyttöliittymän kautta voidaan kirjautuneesta käyttäjästä riippuen tarkastella, luoda, muokata tai poistaa säädöksiä. Ohjelman tietokantaan voidaan lisätä säädöksiä selainkäyttöliittymän lisäksi API-rajapinnan kautta (kts. post-api.py). 
 
-##Käytetyt teknologiat:
+## Käytetyt teknologiat:
 
 Kehikko: Spring
 Palvelin: Apache Tomcat
 Tietokanta: H2 Database
 Template engine: Thymeleaf
 
-##post-api.py -skriptin käyttö
+## post-api.py -skriptin käyttö
 
 Uusi säädöksiä Netlex-ohjelmaan sen API-rajapinnan kautta voi lähettää post-api.py -skriptin avulla. Skripti suoritettaessa se hakee samassa juurikansiossa olevien, pelkällä vuosiluvulla nimettyjen kansioiden sisällöstä satunnaisen XML-tiedoston, jonka perusteella skripti luo säädös-olion ja lähettää sen POST-pyyntönä osoitteeseen http://localhost:8080. 
 XML-tiedostot tulee erikseen ladata Semanttinen Finlex -palvelusta osoitteesta https://data.finlex.fi/download/xml/asd.html.
