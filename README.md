@@ -16,5 +16,5 @@ Template engine: Thymeleaf <br>
 
 ## post-api.py -skriptin käyttö
 
-Uusi säädöksiä Netlex-ohjelmaan sen REST-rajapinnan kautta voi lähettää post-api.py -skriptin avulla. Skripti suoritettaessa se hakee samassa juurikansiossa olevien, pelkällä vuosiluvulla nimettyjen kansioiden sisällöstä satunnaisen XML-tiedoston, jonka perusteella skripti luo säädös-olion ja lähettää sen POST-pyyntönä osoitteeseen http://localhost:8080. <br>
+Uusi säädöksiä Netlex-ohjelmaan sen REST-rajapinnan kautta voi lähettää post-api.py -skriptin avulla. Skripti suoritettaessa se hakee samassa juurikansiossa olevien, pelkällä vuosiluvulla nimettyjen kansioiden sisällöstä satunnaisen XML-tiedoston, jonka perusteella skripti luo säädös-olion ja lähettää sen POST-pyyntönä osoitteeseen <span>http://localhost:8080.</span> <br>
 XML-tiedostot tulee erikseen ladata Semanttinen Finlex -palvelusta osoitteesta https://data.finlex.fi/download/xml/asd.html.
