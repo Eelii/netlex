@@ -8,7 +8,7 @@ Netlex on Java-kielinen, Spring-kehikolle perustuva Finlex-sivuston jäljitelmä
 
 ## Käytetyt teknologiat:
 
-Kehikko: Spring
+Kehikko: Spring <br>
 Palvelin: Apache Tomcat
 Tietokanta: H2 Database
 Template engine: Thymeleaf
