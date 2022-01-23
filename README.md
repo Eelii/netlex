@@ -12,6 +12,7 @@ Kehikko: Spring <br>
 Palvelin: Apache Tomcat <br>
 Tietokanta: H2 Database <br>
 Template engine: Thymeleaf <br>
+3D-animaatio: Babylon.js
 
 ## post-api.py -skriptin käyttö
 
